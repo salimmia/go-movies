@@ -26,7 +26,7 @@ func main(){
 
 	log.Println("Starting application on port", port)
 
-	http.HandleFunc("/", Hello)
+	http.HandleFunc("/", app.Home)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 
