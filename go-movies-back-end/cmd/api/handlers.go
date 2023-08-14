@@ -66,7 +66,7 @@ func (app *application) AllMovies(w http.ResponseWriter, r *http.Request){
 		fmt.Println(err)
 		return
 	}
-	w.Header().Set("Content-type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(out)
 }
