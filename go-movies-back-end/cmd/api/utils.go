@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
@@ -31,4 +32,28 @@ func (app *application) WriteJSON(w http.ResponseWriter, status int, data interf
 	}
 
 	return nil
+}
+
+func (app *application) ReadJSON(w http.ResponseWriter, r *http.Request, data interface{}) error{
+	maxByte := 1024 * 1024
+
+	r.Body = http.MaxBytesReader(w, r.Body, int64(maxByte))
+
+	dec := json.NewDecoder(r.Body)
+
+	dec.DisallowUnknownFields()
+
+	err := dec.Decode(data)
+
+	if err != nil{
+		return err
+	}
+
+	err = dec.Decode(&struct{}{})
+
+	if err != nil{
+		return errors.New("body must only contain a single JSON value")
+	}
+
+	return nil;
 }
