@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"net/http"
 )
 
@@ -46,7 +45,7 @@ func (app *application) authenticate(w http.ResponseWriter, r *http.Request){
 	// validate user against database
 	user, err := app.DB.GetUserByEmail(requestPayload.Email)
 
-	log.Println(user)
+	// log.Println(user)
 
 	if err != nil{
 		app.ErrorJSON(w, errors.New("invalid credentials"), http.StatusBadRequest)
