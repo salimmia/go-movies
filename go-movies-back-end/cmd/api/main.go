@@ -31,10 +31,10 @@ func main() {
 	flag.StringVar(&app.DSN, "dsn", "host=localhost port=5434 user=postgres password=password dbname=movies sslmode=disable timezone=UTC connect_timeout=5", "Postgres connection string")
 	
 	flag.StringVar(&app.JWTSecret, "jwt-secret", "verysecret", "sigining secret")
-	flag.StringVar(&app.JWTIssuer, "jwt-issuer", "example.con", "signing issuer")
-	flag.StringVar(&app.JWTAudience, "jwt-audience", "example.con", "signing audience")
-	flag.StringVar(&app.CookieDomain, "cookie-domain", "example.con", "cookie domain")
-	flag.StringVar(&app.Domain, "jwt-issuer", "example.con", "domain")
+	flag.StringVar(&app.JWTIssuer, "jwt-issuer", "example.com", "signing issuer")
+	flag.StringVar(&app.JWTAudience, "jwt-audience", "example.com", "signing audience")
+	flag.StringVar(&app.CookieDomain, "cookie-domain", "example.com", "cookie domain")
+	flag.StringVar(&app.Domain, "domain", "example.com", "domain")
 	
 	flag.Parse()
 
