@@ -57,3 +57,17 @@ func (app *application) ReadJSON(w http.ResponseWriter, r *http.Request, data in
 
 	return nil;
 }
+
+func (app *application) ErrorJSON(w http.ResponseWriter, err error, status ...int) error{
+	statusCode := http.StatusBadRequest
+
+	if len(status) > 0{
+		statusCode = status[0]
+	}
+
+	var payload JSONResponse
+	payload.Error = true
+	payload.Message = err.Error()
+
+	return app.WriteJSON(w, statusCode, payload)
+}
