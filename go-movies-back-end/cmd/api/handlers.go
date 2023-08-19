@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -81,9 +80,9 @@ func (app *application) authenticate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) refreshToken(w http.ResponseWriter, r *http.Request) {
-	log.Println("refreshing...")
+	// log.Println("refreshing...")
 	for _, cookie := range r.Cookies() {
-		log.Println("name: ",cookie.Name)
+		// log.Println("name: ",cookie.Name)
 		if cookie.Name == app.auth.CookieName {
 			
 			claims := &Claims{}
@@ -131,4 +130,10 @@ func (app *application) refreshToken(w http.ResponseWriter, r *http.Request) {
 			// log.Println(r.Cookies())
 		}
 	}
+}
+
+func (app *application) logout(w http.ResponseWriter, r *http.Request){
+	http.SetCookie(w, app.auth.GetExpiredRefreshCookie())
+
+	w.WriteHeader(http.StatusOK)
 }
