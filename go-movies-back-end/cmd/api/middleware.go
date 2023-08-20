@@ -22,6 +22,7 @@ func (app *application) authRequired(next http.Handler) http.Handler{
 		_, _, err := app.auth.GetTokenFromHeaderAndVerify(w, r)
 		if err != nil{
 			w.WriteHeader(http.StatusUnauthorized)
+			return
 		}
 		next.ServeHTTP(w, r)
 	})

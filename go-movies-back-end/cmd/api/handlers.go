@@ -139,5 +139,11 @@ func (app *application) logout(w http.ResponseWriter, r *http.Request){
 }
 
 func (app *application) MovieCatalog(w http.ResponseWriter, r *http.Request){
-	
+	movies, err := app.DB.AllMovies()
+	if err != nil {
+		app.ErrorJSON(w, err)
+		return
+	}
+
+	_ = app.WriteJSON(w, http.StatusOK, movies)
 }
