@@ -10,6 +10,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
+// Auth structure 
 type Auth struct {
 	Issuer        string
 	Audience      string
